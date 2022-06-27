@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -6,17 +7,32 @@ using UnityEngine.UI;
 
 public class Quiz : MonoBehaviour
 {
+    [Header	("Questions")]
     [SerializeField] private QuestionScriptableObject question;
     [SerializeField] private TextMeshProUGUI questionTitle;
+    
+    [Header	("Answers")]
     [SerializeField] private GameObject[] answerButtons;
-
     private int correctAnswerIndex;
+    
+    [Header	("Button Colors")]
     [SerializeField] private Sprite defaultAnswerSprite;
     [SerializeField] private Sprite correctAnswerSprite;
+    
+    [Header	("Timers")]
+    [SerializeField] private Image timerImage;
+    private Timer timer;
+    
     void Start()
     {
+        timer = FindObjectOfType<Timer>();
         GetNextQuestion();
         //DisplayQuestion();
+    }
+
+    private void Update()
+    {
+        timerImage.fillAmount = timer.fillFraction;
     }
 
     private void DisplayQuestion()
