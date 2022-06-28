@@ -15,7 +15,7 @@ MonoBehaviour:
   question: what is the correct definition of integer variable?
   answers:
   - 'int x : 1;'
-  - int x= 1;
+  - int x = 1;
   - int x = "1";
   - int x = '1';
   correctAnswerIndex: 1
