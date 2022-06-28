@@ -994,7 +994,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f1ed6a293cff4fa7a3d9f2a7c8ec70a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  question: {fileID: 11400000, guid: b00621873cbfa4bbea533ccd9cd3d742, type: 2}
+  questions:
+  - {fileID: 11400000, guid: b00621873cbfa4bbea533ccd9cd3d742, type: 2}
+  - {fileID: 11400000, guid: e8b2bdda73b26426cb42b6914a500c50, type: 2}
+  - {fileID: 11400000, guid: db51103e97a544638a5446cfe13add0f, type: 2}
+  - {fileID: 11400000, guid: e7c2a00892d71447fb4ff3b2914f0141, type: 2}
+  - {fileID: 11400000, guid: 4d9a597edf4b74499819b8a9efffb8c3, type: 2}
   questionTitle: {fileID: 379034332}
   answerButtons:
   - {fileID: 1306040097}
@@ -1370,7 +1375,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToCompleteQuestion: 5
-  timeToShowCorrectAnswer: 10
+  timeToShowCorrectAnswer: 3
   loadNextQuestion: 0
   isAnsweringQuestion: 0
   fillFraction: 0
