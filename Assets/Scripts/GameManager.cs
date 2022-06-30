@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,15 +8,20 @@ public class GameManager : MonoBehaviour
 {
     private Quiz quiz;
     private EndScreen endScreen;
-    
-    void Start()
+
+    void Awake()
     {
         quiz = FindObjectOfType<Quiz>();
         endScreen = FindObjectOfType<EndScreen>();
-
+    }
+    
+    private void Start()
+    {
         quiz.gameObject.SetActive(true);
         endScreen.gameObject.SetActive(false);
     }
+
+    
 
     
     void Update()
