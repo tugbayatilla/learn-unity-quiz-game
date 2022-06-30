@@ -8,27 +8,31 @@ using Random = UnityEngine.Random;
 
 public class Quiz : MonoBehaviour
 {
-    [Header("Questions")] 
-    [SerializeField] private List<QuestionScriptableObject> questions = new List<QuestionScriptableObject>();
+    [Header("Questions")] [SerializeField]
+    private List<QuestionScriptableObject> questions = new List<QuestionScriptableObject>();
+
     [SerializeField] private TextMeshProUGUI questionTitle;
     private QuestionScriptableObject currentQuestion;
 
-    [Header	("Answers")]
-    [SerializeField] private GameObject[] answerButtons;
+    [Header("Answers")] [SerializeField] private GameObject[] answerButtons;
     private int correctAnswerIndex;
     private bool hasAnsweredEarly;
-    
-    [Header	("Button Colors")]
-    [SerializeField] private Sprite defaultAnswerSprite;
+
+    [Header("Button Colors")] [SerializeField]
+    private Sprite defaultAnswerSprite;
+
     [SerializeField] private Sprite correctAnswerSprite;
-    
-    [Header	("Timers")]
-    [SerializeField] private Image timerImage;
+
+    [Header("Timers")] [SerializeField] private Image timerImage;
     private Timer timer;
-    
+
+    [Header("Scoring")] [SerializeField] private TextMeshProUGUI scoreText;
+    private ScoreKeeper scoreKeeper;
+
     void Start()
     {
         timer = FindObjectOfType<Timer>();
+        scoreKeeper = FindObjectOfType<ScoreKeeper>();
     }
 
     private void Update()
@@ -65,6 +69,8 @@ public class Quiz : MonoBehaviour
 
         SetButtonState(false);
         timer.CancelTimer();
+
+        scoreText.text = $"Score: {scoreKeeper.CalculateScore()}%";
     }
 
     private void DisplayAnswer(int index)
@@ -74,6 +80,7 @@ public class Quiz : MonoBehaviour
             questionTitle.text = "Correct!";
             var buttonImage = answerButtons[index].GetComponent<Image>();
             buttonImage.sprite = correctAnswerSprite;
+            scoreKeeper.incrementCorrectAnswers();
         }
         else
         {
@@ -102,8 +109,8 @@ public class Quiz : MonoBehaviour
             SetDefaultButtonSprites();
             GetRandomQuestion();
             DisplayQuestion();
+            scoreKeeper.incrementQuestionSeen();
         }
-        
     }
 
     private void GetRandomQuestion()
@@ -115,11 +122,10 @@ public class Quiz : MonoBehaviour
         {
             questions.Remove(currentQuestion);
         }
-
     }
 
     private void SetDefaultButtonSprites()
-    {   
+    {
         foreach (var t in answerButtons)
         {
             var buttonImage = t.GetComponent<Image>();
